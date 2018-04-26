@@ -17,6 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var pwdTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var weatherLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let locationManager = CLLocationManager()
     var userLocations = CLLocationCoordinate2D()
@@ -64,16 +65,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func loginPressed(_ sender: Any) {
-        
+        activityIndicator.startAnimating()
         guard let userEmail = userTextField.text, !userEmail.isEmpty
             else {
                 displayMyAlertMessage(userMessage: "Enter a valid Email!")
+                self.activityIndicator.stopAnimating()
                 return
         }
         
         guard let userPassword = pwdTextField.text, !userPassword.isEmpty
             else {
                 displayMyAlertMessage(userMessage: "Enter a valid Password!")
+                self.activityIndicator.stopAnimating()
                 return
         }
         
@@ -84,6 +87,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 } else { //Failed Authentication
                     self.showAlertView(alertMessage: (error?.localizedDescription)!)
                 }
+                self.activityIndicator.startAnimating()
             })
         }
         

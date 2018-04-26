@@ -44,7 +44,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELO-jM-thZ">
                                 <rect key="frame" x="147" y="210" width="80" height="50"/>
@@ -68,6 +68,9 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Wha-6i-Fdr">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.01106808479" green="0.79113920019999995" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -76,8 +79,10 @@
                             <constraint firstItem="6Z1-yZ-x7M" firstAttribute="top" secondItem="GaC-0a-Hr2" secondAttribute="bottom" constant="10" id="E0K-SP-S02"/>
                             <constraint firstItem="GKZ-zd-LbD" firstAttribute="top" secondItem="6Z1-yZ-x7M" secondAttribute="bottom" constant="10" id="G4q-yY-H8s"/>
                             <constraint firstItem="adD-hl-vtu" firstAttribute="trailing" secondItem="6Z1-yZ-x7M" secondAttribute="trailing" constant="20" id="Gkc-OQ-3TE"/>
+                            <constraint firstItem="Wha-6i-Fdr" firstAttribute="centerX" secondItem="GTz-6W-aPN" secondAttribute="centerX" id="ITH-dh-faU"/>
                             <constraint firstItem="6Z1-yZ-x7M" firstAttribute="leading" secondItem="adD-hl-vtu" secondAttribute="leading" constant="20" id="MoJ-oG-fnO"/>
                             <constraint firstItem="ELO-jM-thZ" firstAttribute="centerX" secondItem="GTz-6W-aPN" secondAttribute="centerX" id="UBa-SZ-5F9"/>
+                            <constraint firstItem="Wha-6i-Fdr" firstAttribute="centerY" secondItem="GTz-6W-aPN" secondAttribute="centerY" id="XMO-t2-1D1"/>
                             <constraint firstItem="GaC-0a-Hr2" firstAttribute="top" secondItem="adD-hl-vtu" secondAttribute="top" constant="20" id="aBT-ZF-Hbt"/>
                             <constraint firstItem="NXz-D0-gia" firstAttribute="top" secondItem="ELO-jM-thZ" secondAttribute="bottom" constant="20" id="dKy-GA-2r6"/>
                             <constraint firstItem="adD-hl-vtu" firstAttribute="trailing" secondItem="GKZ-zd-LbD" secondAttribute="trailing" constant="20" id="f7J-Mc-1lR"/>
@@ -91,6 +96,7 @@
                     <tabBarItem key="tabBarItem" title="LogIn" id="MYg-lb-7fo"/>
                     <navigationItem key="navigationItem" id="PhC-JL-9sK"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Wha-6i-Fdr" id="hVl-HD-6cH"/>
                         <outlet property="pwdTextField" destination="GKZ-zd-LbD" id="sxF-d7-g4A"/>
                         <outlet property="submitButton" destination="ELO-jM-thZ" id="C3X-ve-FLq"/>
                         <outlet property="userTextField" destination="6Z1-yZ-x7M" id="CCK-G9-LaU"/>
@@ -105,7 +111,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="yyu-9j-yys">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="61o-kq-FkE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="Pwy-ar-Ywq" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xoi-4P-VQL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -117,6 +122,7 @@
                         <segue destination="DUI-Lp-T9O" kind="relationship" relationship="viewControllers" id="WLM-UT-66K"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="61o-kq-FkE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2038" y="20"/>
         </scene>
@@ -188,6 +194,9 @@
                                     <action selector="registerNow:" destination="DUI-Lp-T9O" eventType="touchUpInside" id="8Eo-PJ-vg3"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="4hT-h2-XyQ">
+                                <rect key="frame" x="177" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.01106808479" green="0.79113920019999995" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -196,6 +205,7 @@
                             <constraint firstItem="IaV-Oq-T6N" firstAttribute="trailing" secondItem="v0g-WG-yL9" secondAttribute="trailing" constant="10" id="BXP-3f-d4y"/>
                             <constraint firstItem="zgg-Yk-Ffc" firstAttribute="leading" secondItem="IaV-Oq-T6N" secondAttribute="leading" constant="20" id="DkN-G5-A70"/>
                             <constraint firstItem="IaV-Oq-T6N" firstAttribute="trailing" secondItem="gnN-ac-Q4o" secondAttribute="trailing" constant="20" id="GDu-8h-mLH"/>
+                            <constraint firstItem="4hT-h2-XyQ" firstAttribute="centerX" secondItem="giE-PU-Jvx" secondAttribute="centerX" id="IhG-DG-Irm"/>
                             <constraint firstItem="gnN-ac-Q4o" firstAttribute="top" secondItem="v0g-WG-yL9" secondAttribute="bottom" constant="10" id="JlM-cx-uzr"/>
                             <constraint firstItem="v0g-WG-yL9" firstAttribute="leading" secondItem="IaV-Oq-T6N" secondAttribute="leading" constant="10" id="JxD-g4-7nl"/>
                             <constraint firstItem="zgg-Yk-Ffc" firstAttribute="top" secondItem="dZ9-bp-qaH" secondAttribute="bottom" constant="10" id="Nh4-yT-irI"/>
@@ -203,6 +213,7 @@
                             <constraint firstItem="IaV-Oq-T6N" firstAttribute="trailing" secondItem="dZ9-bp-qaH" secondAttribute="trailing" constant="20" id="V6N-Cl-HjS"/>
                             <constraint firstItem="IaV-Oq-T6N" firstAttribute="trailing" secondItem="oDR-Px-x0P" secondAttribute="trailing" constant="20" id="YEL-lb-Lf7"/>
                             <constraint firstItem="dZ9-bp-qaH" firstAttribute="top" secondItem="oDR-Px-x0P" secondAttribute="bottom" constant="10" id="Z4d-RA-5pj"/>
+                            <constraint firstItem="4hT-h2-XyQ" firstAttribute="centerY" secondItem="giE-PU-Jvx" secondAttribute="centerY" id="bTF-AY-aIn"/>
                             <constraint firstItem="oDR-Px-x0P" firstAttribute="leading" secondItem="IaV-Oq-T6N" secondAttribute="leading" constant="20" id="boU-R9-cRK"/>
                             <constraint firstItem="ttK-Th-nde" firstAttribute="top" secondItem="zgg-Yk-Ffc" secondAttribute="bottom" constant="20" id="hXy-mp-kXE"/>
                             <constraint firstItem="dZ9-bp-qaH" firstAttribute="leading" secondItem="IaV-Oq-T6N" secondAttribute="leading" constant="20" id="iYj-v6-nSR"/>
@@ -214,6 +225,7 @@
                     <tabBarItem key="tabBarItem" title="Register" id="L9P-tF-wk4"/>
                     <navigationItem key="navigationItem" id="1PU-yE-kPk"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="4hT-h2-XyQ" id="wKQ-OU-49x"/>
                         <outlet property="cnfpwdTextField" destination="zgg-Yk-Ffc" id="Icv-OM-ALg"/>
                         <outlet property="emailTextField" destination="oDR-Px-x0P" id="4QY-En-Una"/>
                         <outlet property="nameTextField" destination="gnN-ac-Q4o" id="2EU-al-zqe"/>

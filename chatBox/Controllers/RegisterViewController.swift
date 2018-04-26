@@ -17,17 +17,14 @@ class RegisterViewController: UIViewController{
     @IBOutlet weak var pwdTextField: UITextField!
     @IBOutlet weak var cnfpwdTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerButton.layer.cornerRadius = 15
         registerButton.clipsToBounds = true
         subscribeToKeyboardNotification()
-        nameTextField.text = ""
-        emailTextField.text = ""
-        pwdTextField.text = ""
-        cnfpwdTextField.text = ""
+        self.empty()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -36,6 +33,7 @@ class RegisterViewController: UIViewController{
     }
     
     @IBAction func registerNow(_ sender: Any) {
+        activityIndicator.startAnimating()
         if(pwdTextField.text == cnfpwdTextField.text)
         {
             Auth.auth().createUser(withEmail: emailTextField.text!, password: pwdTextField.text!) { (user, error) in
@@ -48,18 +46,30 @@ class RegisterViewController: UIViewController{
                             if error != nil{
                                 self.showAlertView(alertMessage: (error?.localizedDescription)!)
                             }
+                            self.activityIndicator.stopAnimating()
+                            self.displayMyAlertMessage(userMessage: "Registration Suceessful")
+                            self.empty()
                         })
                     }
-                    self.dismiss(animated: true, completion: nil) //Return To LoginController
                 } else {
+                    self.activityIndicator.stopAnimating()
                     self.showAlertView(alertMessage: (error?.localizedDescription)!)
                 }
             }
         }else{
-            displayMyAlertMessage(userMessage: "Passwords Do Not Match! Try Again")
-            pwdTextField.text = ""
-            cnfpwdTextField.text = ""
+            self.activityIndicator.stopAnimating()
+            displayMyAlertMessage(userMessage: "Passwords Do Not Match!Please Try Again")
+            self.empty()
         }
+    }
+    
+    func empty()
+    {
+        nameTextField.text = ""
+        emailTextField.text = ""
+        cnfpwdTextField.text = ""
+        pwdTextField.text = ""
+        
     }
 }
 
