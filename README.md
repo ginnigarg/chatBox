@@ -7,8 +7,8 @@
 #### -> Swift 4
 
 ### Theory
--> This App is a Public ChatRoom App where Users Sign in after registering using their Email IDs and could chat with people across Globe.
-It makes Use of Firebase For Network and Database Support.
+-> This App is a Public ChatRoom App where Users Sign in after registering using their Email IDs and could chat with people all across Globe.
+It uses Firebase for Networking and Database Support.
 
 ### How To Run It
 #### -> Download this Project on your Mac
