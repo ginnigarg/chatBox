@@ -26,6 +26,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         submitButton.layer.cornerRadius = 15
         submitButton.clipsToBounds = true
+        userTextField.text = ""
+        pwdTextField.text = ""
         locationManagerSetup()
         NotificationCenter.default.addObserver(self, selector: #selector(updateWeatherLabel) , name: Notification.Name.ValueChanged, object: nil)
     }

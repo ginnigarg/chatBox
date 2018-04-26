@@ -42,7 +42,7 @@ class MainViewController: UIViewController {
     func delegateSetup() {
         messageTableView.delegate = self
         messageTableView.dataSource = self
-        messageTextField.delegate = (self as! UITextFieldDelegate)
+        messageTextField.delegate = self as? UITextFieldDelegate
     }
     
     func databaseSetup(){

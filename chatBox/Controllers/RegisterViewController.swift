@@ -24,6 +24,10 @@ class RegisterViewController: UIViewController{
         registerButton.layer.cornerRadius = 15
         registerButton.clipsToBounds = true
         subscribeToKeyboardNotification()
+        nameTextField.text = ""
+        emailTextField.text = ""
+        pwdTextField.text = ""
+        cnfpwdTextField.text = ""
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -47,7 +51,7 @@ class RegisterViewController: UIViewController{
                         })
                     }
                     self.dismiss(animated: true, completion: nil) //Return To LoginController
-                } else { //Sign Up Unsuccessful
+                } else {
                     self.showAlertView(alertMessage: (error?.localizedDescription)!)
                 }
             }
