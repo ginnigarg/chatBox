@@ -82,9 +82,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         if (userTextField.text != "" && pwdTextField.text != ""){
             Auth.auth().signIn(withEmail: userTextField.text!, password: pwdTextField.text!, completion: { (user, error) in
-                if user != nil { //User Signed In Successfully
+                if user != nil {
                     self.performSegue(withIdentifier: "MainActivity", sender: sender)
-                } else { //Failed Authentication
+                } else {
                     self.showAlertView(alertMessage: (error?.localizedDescription)!)
                 }
                 self.activityIndicator.startAnimating()
