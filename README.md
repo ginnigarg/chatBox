@@ -16,3 +16,10 @@
 - Open the chatBox.xcworkspace
 - Just Build It and Run it
 
+#### If your project has mssing Googleservice-info.plist missing then please follow the steps in screenshots below :
+- ![alt text](images/1.png)
+- ![alt text](images/2.png)
+- ![alt text](images/3.png)
+- ![alt text](images/4.png)
+- Now click on Add and Run again
+
