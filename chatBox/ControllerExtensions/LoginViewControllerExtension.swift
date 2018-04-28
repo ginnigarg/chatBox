@@ -8,8 +8,6 @@
 
 import Foundation
 import UIKit
-import MapKit
-import CoreLocation
 
 extension LoginViewController{
     
@@ -29,6 +27,7 @@ extension LoginViewController{
             }
         }
     }
+    
     @objc func returnKeyboardBack(){
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
             if (userTextField.isFirstResponder || pwdTextField.isFirstResponder) {
@@ -42,11 +41,3 @@ extension LoginViewController{
     }
 }
 
-extension LoginViewController : CLLocationManagerDelegate{
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        userLocations = (manager.location?.coordinate)!
-        let networkInstance = Networking()
-        locationValue = networkInstance.networkSession(userCoordinate: userLocations)
-        locationManager.stopUpdatingLocation()
-    }
-}
