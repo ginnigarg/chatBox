@@ -21,9 +21,12 @@ class RegisterViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         registerButton.layer.cornerRadius = 15
         registerButton.clipsToBounds = true
         subscribeToKeyboardNotification()
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
         self.empty()
     }
     
@@ -33,9 +36,9 @@ class RegisterViewController: UIViewController{
     }
     
     @IBAction func registerNow(_ sender: Any) {
+        activityIndicator.isHidden = false
         activityIndicator.startAnimating()
-        if(pwdTextField.text == cnfpwdTextField.text)
-        {
+        if(pwdTextField.text == cnfpwdTextField.text) {
             Auth.auth().createUser(withEmail: emailTextField.text!, password: pwdTextField.text!) { (user, error) in
                 if user != nil { //Sign Up Successful
                     print("Success")
@@ -46,30 +49,31 @@ class RegisterViewController: UIViewController{
                             if error != nil{
                                 self.showAlertView(alertMessage: (error?.localizedDescription)!)
                             }
+                            self.activityIndicator.isHidden = true
                             self.activityIndicator.stopAnimating()
                             self.displayMyAlertMessage(userMessage: "Registration Suceessful")
                             self.empty()
                         })
                     }
                 } else {
+                    self.activityIndicator.isHidden = true
                     self.activityIndicator.stopAnimating()
                     self.showAlertView(alertMessage: (error?.localizedDescription)!)
                 }
             }
         }else{
+            self.activityIndicator.isHidden = true
             self.activityIndicator.stopAnimating()
             displayMyAlertMessage(userMessage: "Passwords Do Not Match!Please Try Again")
             self.empty()
         }
     }
     
-    func empty()
-    {
+    func empty() {
         nameTextField.text = ""
         emailTextField.text = ""
         cnfpwdTextField.text = ""
         pwdTextField.text = ""
-        
     }
 }
 

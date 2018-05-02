@@ -30,7 +30,7 @@ struct Constants {
         }
         
         struct ParameterValues{
-            static let APIKeyValue = "77685aed209fa546b672cd904b3288bf"
+            static let APIKeyValue = ""
         }
         
         struct ResponseKeys {

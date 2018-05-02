@@ -60,7 +60,7 @@ class MainViewController: UIViewController {
         storageReference = Storage.storage().reference()
     }
 
-    @IBAction func CameraAction(_ sender: Any) {
+    @IBAction func cameraAction(_ sender: Any) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)

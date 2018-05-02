@@ -8,29 +8,23 @@
 
 import UIKit
 import FirebaseAuth
-import MapKit
-import CoreLocation
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var pwdTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
-    @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
-    let locationManager = CLLocationManager()
-    var userLocations = CLLocationCoordinate2D()
-    var locationValue = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         submitButton.layer.cornerRadius = 15
         submitButton.clipsToBounds = true
         userTextField.text = ""
         pwdTextField.text = ""
-        locationManagerSetup()
-        NotificationCenter.default.addObserver(self, selector: #selector(updateWeatherLabel) , name: Notification.Name.ValueChanged, object: nil)
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,34 +35,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @objc func updateWeatherLabel(){
-        let networkingInstance = Networking()
-        locationValue = networkingInstance.getValues()
-        DispatchQueue.main.async {
-            self.weatherLabel.text = "Today It's \(self.locationValue[0]) over \(self.locationValue[1])"
-        }
-    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
     }
     
-    fileprivate func locationManagerSetup() {
-        locationManager.requestAlwaysAuthorization()
-        locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled(){
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
-    }
     
     @IBAction func loginPressed(_ sender: Any) {
+        activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         guard let userEmail = userTextField.text, !userEmail.isEmpty
             else {
                 displayMyAlertMessage(userMessage: "Enter a valid Email!")
+                self.activityIndicator.isHidden = true
                 self.activityIndicator.stopAnimating()
                 return
         }
@@ -76,6 +56,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         guard let userPassword = pwdTextField.text, !userPassword.isEmpty
             else {
                 displayMyAlertMessage(userMessage: "Enter a valid Password!")
+                self.activityIndicator.isHidden = true
                 self.activityIndicator.stopAnimating()
                 return
         }
@@ -83,11 +64,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if (userTextField.text != "" && pwdTextField.text != ""){
             Auth.auth().signIn(withEmail: userTextField.text!, password: pwdTextField.text!, completion: { (user, error) in
                 if user != nil {
+                    self.activityIndicator.isHidden = true
+                    self.activityIndicator.stopAnimating()
                     self.performSegue(withIdentifier: "MainActivity", sender: sender)
                 } else {
                     self.showAlertView(alertMessage: (error?.localizedDescription)!)
                 }
-                self.activityIndicator.startAnimating()
+                self.activityIndicator.isHidden = true
+                self.activityIndicator.stopAnimating()
             })
         }
         
